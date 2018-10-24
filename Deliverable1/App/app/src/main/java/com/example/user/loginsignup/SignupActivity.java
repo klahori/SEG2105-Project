@@ -34,6 +34,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName,editTextRole,editTextUsername;
         private ProgressBar progressBar;
         private FirebaseAuth mAuth;
+        private  String Admin;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             startActivity(intent);
         }
         private void registerUser() {
+
+
             final String name = editTextName.getText().toString().trim();
             final String username = editTextUsername.getText().toString().trim();
 
@@ -166,72 +169,99 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             DatabaseReference ref = database.getReference().child("Users");
 
 // Attach a listener to read the daVta at our posts reference
-            ref.orderByChild("role")
-                    .equalTo("Admin").addListenerForSingleValueEvent(new ValueEventListener() {
+            ref.orderByChild("username")
+                    .equalTo(username).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     if (dataSnapshot.exists()) {
-                        editTextRole.setError(getString(R.string.input_error_admin));
-                        editTextRole.requestFocus();
+                        editTextUsername.setError(getString(R.string.input_error_username));
+                        editTextUsername.requestFocus();
 
                     } else
 
                     {
 
+                        if (!(role.equals("Admin"))){
+                            Admin="role";
+                        }else{
+                            Admin="Admin";
+                        }
+                        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                        DatabaseReference ref = database.getReference().child("Users");
+// Attach a listener to read the daVta at our posts reference
+                        ref.orderByChild("role").equalTo(Admin).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    editTextRole.setError(getString(R.string.input_error_admin));
+                                    editTextRole.requestFocus();
 
-                        progressBar.setVisibility(View.VISIBLE);
-                        mAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                } else
+
+                                {
 
 
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressBar.setVisibility(View.VISIBLE);
+                                    mAuth.createUserWithEmailAndPassword(email, password)
+                                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-                                        if (task.isSuccessful()) {
-
-                                            User user = new User(
-                                                    username,
-                                                    name,
-                                                    last,
-                                                    email,
-                                                    phone,
-                                                    address,
-                                                    role
-
-                                            );
-
-                                            FirebaseDatabase.getInstance().getReference("Users")
-                                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                                                 @Override
-                                                public void onComplete(@NonNull Task<Void> task) {
-                                                    progressBar.setVisibility(View.GONE);
+                                                public void onComplete(@NonNull Task<AuthResult> task) {
+
                                                     if (task.isSuccessful()) {
-                                                        goBack();
-                                                        Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+
+                                                        User user = new User(
+                                                                username,
+                                                                name,
+                                                                last,
+                                                                email,
+                                                                phone,
+                                                                address,
+                                                                role
+
+                                                        );
+
+                                                        FirebaseDatabase.getInstance().getReference("Users")
+                                                                .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                                            @Override
+                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                progressBar.setVisibility(View.GONE);
+                                                                if (task.isSuccessful()) {
+                                                                    goBack();
+                                                                    Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+                                                                } else {
+                                                                    //display a failure message
+                                                                }
+                                                            }
+                                                        });
+
                                                     } else {
-                                                        //display a failure message
+                                                        Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                                     }
                                                 }
                                             });
 
-                                        } else {
-                                            Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                                        }
-                                    }
-                                });
 
+                                }
+                            }
 
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                            }
+                        });
                     }
+
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
                 }
             });
+
         }
-
-
 
 
 

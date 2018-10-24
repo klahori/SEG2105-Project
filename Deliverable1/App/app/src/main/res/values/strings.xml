@@ -2,7 +2,7 @@
     <string name="app_name">LoginSignup</string>
     <string name="first_name">first name</string>
     <string name="last_name">last name</string>
-
+    <string name="input_error_username">Username already exists</string>
     <string name="email">email</string>
     <string name="password">password</string>
     <string name="phone">phone</string>

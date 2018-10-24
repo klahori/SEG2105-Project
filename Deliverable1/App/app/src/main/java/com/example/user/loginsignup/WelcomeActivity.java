@@ -70,14 +70,32 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 String role = dataSnapshot.child("role").getValue(String.class);
 
                 textViewUserEmail.setText("Welcome "+name+ " you are logged in as "+role);
+               /* if(role.equals("Admin")){
 
+
+                    // Start listing users from the beginning, 1000 at a time.
+                    ListUsersPage page = FirebaseAuth.getInstance().listUsers(null);
+                    while (page != null) {
+                        for (ExportedUserRecord user : page.getValues()) {
+                            System.out.println("User: " + user.getUid());
+                        }
+                        page = page.getNextPage();
+                    }
+
+// Iterate through all users. This will still retrieve users in batches,
+// buffering no more than 1000 users in memory at a time.
+                    page = FirebaseAuth.getInstance().listUsers(null);
+                    for (ExportedUserRecord user : page.iterateAll()) {
+                        System.out.println("User: " + user.getUid());
+                    }
+
+                }*/
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         };
         uidRef.addListenerForSingleValueEvent(eventListener);
-
 
     }
 
