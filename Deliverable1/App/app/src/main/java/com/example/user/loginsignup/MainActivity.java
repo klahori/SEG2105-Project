@@ -1,29 +1,114 @@
 package com.example.user.loginsignup;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
-    private Button button;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+    //defining views
+    private Button buttonSignIn,btnSignup;
+    private EditText editTextEmail;
+    private EditText editTextPassword;
+
+    //firebase auth object
+    private FirebaseAuth firebaseAuth;
+
+    //progress dialog
+    private ProgressDialog progressDialog;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        button = (Button)findViewById(R.id.signupBtn);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                signup();
-            }
-        });
-        }
-        public void signup(){
-        Intent = intent = new Intent(this,SignupActivity.class)
-        startActivity(intent);
+
+        //getting firebase auth object
+        firebaseAuth = FirebaseAuth.getInstance();
+
+
+
+        //initializing views
+        editTextEmail = (EditText) findViewById(R.id.text_Email);
+        editTextPassword = (EditText) findViewById(R.id.text_Password);
+        buttonSignIn = (Button) findViewById(R.id.signinBtn);
+        btnSignup  = (Button) findViewById(R.id.signupBtn);
+
+        progressDialog = new ProgressDialog(this);
+
+        //attaching click listener
+        buttonSignIn.setOnClickListener(this);
+        btnSignup.setOnClickListener(this);
     }
 
-}
+    //method for user login
+    private void userLogin(){
+        String email = editTextEmail.getText().toString().trim();
+        String password  = editTextPassword.getText().toString().trim();
 
+
+        //checking if email and passwords are empty
+        if(TextUtils.isEmpty(email)){
+            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        if(TextUtils.isEmpty(password)){
+            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        //if the email and password are not empty
+        //displaying a progress dialog
+
+
+
+        //logging in the user
+        firebaseAuth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        //if the task is successfull
+                        if(task.isSuccessful()){
+                            //start the profile activity
+                            finish();
+                            startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
+
+                            Toast.makeText(MainActivity.this, getString(R.string.signin_success), Toast.LENGTH_LONG).show();
+
+                        }
+                        else{
+                            Toast.makeText(MainActivity.this, getString(R.string.sigin_fail), Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                });
+
+    }
+
+    @Override
+    public void onClick(View view) {
+        if(view == buttonSignIn){
+            userLogin();
+        }
+
+        if(view == btnSignup){
+            finish();
+            startActivity(new Intent(this, SignupActivity.class));
+        }
+    }
+}

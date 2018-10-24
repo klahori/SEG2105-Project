@@ -1,11 +1,15 @@
 package com.example.user.loginsignup;
 
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
+import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -14,20 +18,26 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 
 public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
 
-        private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName;
+        private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName,editTextRole,editTextUsername;
         private ProgressBar progressBar;
-
         private FirebaseAuth mAuth;
+        private Boolean isAvailable;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_signup);
-
+            editTextUsername=findViewById(R.id.editText_username);
+            editTextRole=findViewById(R.id.role_type);
             editTextName = findViewById(R.id.edit_text_name);
             editTextLastName = findViewById(R.id.lastName);
             editTextAddress = findViewById(R.id.address);
@@ -43,23 +53,45 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             findViewById(R.id.button_register).setOnClickListener(this);
         }
 
+
+
         @Override
         protected void onStart() {
             super.onStart();
 
             if (mAuth.getCurrentUser() != null) {
-                //handle the already login user
             }
         }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        private void goBack(){
+            Intent intent = new Intent(SignupActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
         private void registerUser() {
             final String name = editTextName.getText().toString().trim();
+            final String username = editTextUsername.getText().toString().trim();
+
             final String email = editTextEmail.getText().toString().trim();
             final String last = editTextLastName.getText().toString().trim();
             final String address = editTextAddress.getText().toString().trim();
             String password = editTextPassword.getText().toString().trim();
-            final String phone = editTextPhone.getText().toString().trim
-                    ();
+            final String phone = editTextPhone.getText().toString().trim();
+            final String role = editTextRole.getText().toString().trim();
 
             if (name.isEmpty()) {
                 editTextName.setError(getString(R.string.input_error_first_name));
@@ -115,6 +147,51 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextPhone.requestFocus();
                 return;
             }
+            if (role.isEmpty()) {
+                editTextRole.setError(getString(R.string.input_error_role));
+                editTextRole.requestFocus();
+                return;
+            }
+            /*if (role.equals("Admin")) {
+                if(checkIfAdminExists()){
+                    editTextRole.setError(getString(R.string.input_error_admin));
+                    editTextRole.requestFocus();
+                    return;
+                }
+            }*/
+            if (!(role.equals("Admin")|| role.equals("Service Provider")|| role.equals("Home Owner"))) {
+                editTextRole.setError(getString(R.string.input_error_role_invalid));
+                editTextRole.requestFocus();
+                return;
+            }
+
+
+
+
+             /*   // Get a reference to our posts
+                final FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference ref = database.getReference().child("Users");
+
+// Attach a listener to read the daVta at our posts reference
+                ref.orderByChild("role")
+                        .equalTo(role).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.exists()) {
+                            isAvailable=true;
+                        }
+                        else {
+                            isAvailable= false;
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                    }
+                });
+
+            */
+
 
 
             progressBar.setVisibility(View.VISIBLE);
@@ -126,21 +203,24 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                             if (task.isSuccessful()) {
 
                                 User user = new User(
+                                        username,
                                         name,
                                         last,
                                         email,
                                         phone,
-                                        address
+                                        address,
+                                        role
 
                                 );
 
                                 FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-                                        .setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         progressBar.setVisibility(View.GONE);
                                         if (task.isSuccessful()) {
+                                            goBack();
                                             Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
                                         } else {
                                             //display a failure message
@@ -161,6 +241,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             switch (v.getId()) {
                 case R.id.button_register:
                     registerUser();
+
                     break;
             }
         }
