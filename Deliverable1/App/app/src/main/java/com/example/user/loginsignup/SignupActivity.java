@@ -25,12 +25,15 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
+import static java.lang.Boolean.getBoolean;
+
 public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
 
         private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName,editTextRole,editTextUsername;
         private ProgressBar progressBar;
         private FirebaseAuth mAuth;
-        private Boolean isAvailable;
 
         @Override
         protected void onCreate(Bundle savedInstanceState) {
@@ -76,8 +79,6 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
 
 
-
-
         private void goBack(){
             Intent intent = new Intent(SignupActivity.this,MainActivity.class);
             startActivity(intent);
@@ -89,7 +90,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             final String email = editTextEmail.getText().toString().trim();
             final String last = editTextLastName.getText().toString().trim();
             final String address = editTextAddress.getText().toString().trim();
-            String password = editTextPassword.getText().toString().trim();
+            final String password = editTextPassword.getText().toString().trim();
             final String phone = editTextPhone.getText().toString().trim();
             final String role = editTextRole.getText().toString().trim();
 
@@ -152,91 +153,90 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextRole.requestFocus();
                 return;
             }
-            /*if (role.equals("Admin")) {
-                if(checkIfAdminExists()){
-                    editTextRole.setError(getString(R.string.input_error_admin));
-                    editTextRole.requestFocus();
-                    return;
-                }
-            }*/
-            if (!(role.equals("Admin")|| role.equals("Service Provider")|| role.equals("Home Owner"))) {
+
+
+            if (!(role.equals("Admin") || role.equals("Service Provider") || role.equals("Home Owner"))) {
                 editTextRole.setError(getString(R.string.input_error_role_invalid));
                 editTextRole.requestFocus();
                 return;
             }
 
 
-
-
-             /*   // Get a reference to our posts
-                final FirebaseDatabase database = FirebaseDatabase.getInstance();
-                DatabaseReference ref = database.getReference().child("Users");
+            final FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference ref = database.getReference().child("Users");
 
 // Attach a listener to read the daVta at our posts reference
-                ref.orderByChild("role")
-                        .equalTo(role).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.exists()) {
-                            isAvailable=true;
-                        }
-                        else {
-                            isAvailable= false;
-                        }
-                    }
+            ref.orderByChild("role")
+                    .equalTo("Admin").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if (dataSnapshot.exists()) {
+                        editTextRole.setError(getString(R.string.input_error_admin));
+                        editTextRole.requestFocus();
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                    }
-                });
+                    } else
 
-            */
+                    {
 
 
+                        progressBar.setVisibility(View.VISIBLE);
+                        mAuth.createUserWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
 
-            progressBar.setVisibility(View.VISIBLE);
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-
-                            if (task.isSuccessful()) {
-
-                                User user = new User(
-                                        username,
-                                        name,
-                                        last,
-                                        email,
-                                        phone,
-                                        address,
-                                        role
-
-                                );
-
-                                FirebaseDatabase.getInstance().getReference("Users")
-                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
 
                                     @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        progressBar.setVisibility(View.GONE);
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+
                                         if (task.isSuccessful()) {
-                                            goBack();
-                                            Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+
+                                            User user = new User(
+                                                    username,
+                                                    name,
+                                                    last,
+                                                    email,
+                                                    phone,
+                                                    address,
+                                                    role
+
+                                            );
+
+                                            FirebaseDatabase.getInstance().getReference("Users")
+                                                    .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    progressBar.setVisibility(View.GONE);
+                                                    if (task.isSuccessful()) {
+                                                        goBack();
+                                                        Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();
+                                                    } else {
+                                                        //display a failure message
+                                                    }
+                                                }
+                                            });
+
                                         } else {
-                                            //display a failure message
+                                            Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
                                         }
                                     }
                                 });
 
-                            } else {
-                                Toast.makeText(SignupActivity.this, task.getException().getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
 
+                    }
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            });
         }
 
-        @Override
+
+
+
+
+
+    @Override
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.button_register:

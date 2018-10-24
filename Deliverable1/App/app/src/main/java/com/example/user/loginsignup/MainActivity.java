@@ -56,26 +56,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     //method for user login
-    private void userLogin(){
+    private void userLogin() {
         String email = editTextEmail.getText().toString().trim();
-        String password  = editTextPassword.getText().toString().trim();
+        String password = editTextPassword.getText().toString().trim();
 
 
         //checking if email and passwords are empty
-        if(TextUtils.isEmpty(email)){
-            Toast.makeText(this,"Please enter email",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(email)) {
+            Toast.makeText(this, "Please enter email", Toast.LENGTH_LONG).show();
             return;
         }
 
-        if(TextUtils.isEmpty(password)){
-            Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
+        if (TextUtils.isEmpty(password)) {
+            Toast.makeText(this, "Please enter password", Toast.LENGTH_LONG).show();
             return;
         }
-<<<<<<< HEAD
 
         //if the email and password are not empty
         //displaying a progress dialog
-
 
 
         //logging in the user
@@ -84,27 +82,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //if the task is successfull
-                        if(task.isSuccessful()){
+                        if (task.isSuccessful()) {
                             //start the profile activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
 
                             Toast.makeText(MainActivity.this, getString(R.string.signin_success), Toast.LENGTH_LONG).show();
 
-                        }
-                        else{
+                        } else {
                             Toast.makeText(MainActivity.this, getString(R.string.sigin_fail), Toast.LENGTH_LONG).show();
 
                         }
                     }
                 });
-
-=======
-        public void signup(){
-        Intent intent = new Intent(this,SignupActivity.class);
-        startActivity(intent);
->>>>>>> 060e4d7e27353a59bf747833a2a85caf6a29c320
     }
+        public void signup(){
+            Intent intent = new Intent(this, SignupActivity.class);
+            startActivity(intent);
+        }
+
 
     @Override
     public void onClick(View view) {
@@ -113,8 +109,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(view == btnSignup){
+            signup();
             finish();
-            startActivity(new Intent(this, SignupActivity.class));
         }
     }
 }
