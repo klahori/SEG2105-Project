@@ -6,8 +6,10 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
 import android.widget.TextView;
 
@@ -20,19 +22,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class WelcomeActivity extends AppCompatActivity implements View.OnClickListener {
 
     //firebase auth object
     private FirebaseAuth firebaseAuth;
-
     //view objects
     private Button buttonLogout;
-    private MultiAutoCompleteTextView textUser,textViewUserEmail;
-    private ArrayList array;
+    private MultiAutoCompleteTextView textViewUser;
+    private ArrayList<String> iteam;
+    private ListView listView;
 
-   // private String name,role;
+    // private String name,role;
 
 
     @Override
@@ -56,9 +59,11 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //initializing views
-        textUser=(MultiAutoCompleteTextView) findViewById(R.id.text_users);
-        textViewUserEmail = (MultiAutoCompleteTextView) findViewById(R.id.editTextWelcome);
+        iteam =new ArrayList<String>();
+        textViewUser = (MultiAutoCompleteTextView) findViewById(R.id.editTextWelcome);
         buttonLogout = (Button) findViewById(R.id.logout);
+        listView=(ListView) findViewById(R.id.listUser);
+
 
         //displaying logged in user name
 
@@ -76,38 +81,27 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 String name = dataSnapshot.child("name").getValue(String.class);
                 String role = dataSnapshot.child("role").getValue(String.class);
 
-                textViewUserEmail.setText("Welcome "+name+ " you are logged in as "+role);
 
 
-                if (role.equals("Admin")){
-                    DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+                textViewUser.setText("Welcome " + name + " you are logged in as " + role);
+            /*   if (role.equals("Admin")) {
 
-                    DatabaseReference usersdRef = rootRef.child("users");
+                    for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
-                    ValueEventListener eventListener = new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+                        String username = ds.child("username").getValue(String.class);
 
-                                String name = ds.child("name").getValue(String.class);
-
-                                Log.d("TAG", name);
-
-                                textUser.setText(textUser+" "+name+" " );
-
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    };
-                    usersdRef.addListenerForSingleValueEvent(eventListener);
+                        iteam.add(username);
 
 
-                }
+                    }
+
+            }
+
+                ArrayAdapter<String> adapter = new ArrayAdapter(WelcomeActivity.this, android.R.layout.simple_list_item_1, iteam);
+
+                listView.setAdapter(adapter);*/
+
+
             }
 
             @Override

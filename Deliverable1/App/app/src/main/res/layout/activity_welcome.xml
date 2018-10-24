@@ -11,16 +11,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <MultiAutoCompleteTextView
-            android:id="@+id/editTextWelcome"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <MultiAutoCompleteTextView
-            android:id="@+id/text_users"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
         <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
@@ -28,6 +18,17 @@
             android:text="Logout"
             tools:layout_editor_absoluteX="147dp"
             tools:layout_editor_absoluteY="227dp" />
+
+        <MultiAutoCompleteTextView
+            android:id="@+id/editTextWelcome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ListView
+            android:id="@+id/listUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
     </LinearLayout>
 
 </RelativeLayout>
