@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Toast.makeText(this,"Please enter password",Toast.LENGTH_LONG).show();
             return;
         }
+<<<<<<< HEAD
 
         //if the email and password are not empty
         //displaying a progress dialog
@@ -98,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     }
                 });
 
+=======
+        public void signup(){
+        Intent intent = new Intent(this,SignupActivity.class);
+        startActivity(intent);
+>>>>>>> 060e4d7e27353a59bf747833a2a85caf6a29c320
     }
 
     @Override
