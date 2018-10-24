@@ -31,7 +31,7 @@ import static java.lang.Boolean.getBoolean;
 
 public class SignupActivity extends AppCompatActivity  implements View.OnClickListener {
 
-        private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName,editTextRole,editTextUsername;
+        private EditText editTextName, editTextEmail, editTextPassword, editTextPhone,editTextAddress,editTextLastName,editTextRole,editTextUsername,editTextDay,editTextMonth,editTextYear;
         private ProgressBar progressBar;
         private FirebaseAuth mAuth;
         private  String Admin;
@@ -40,6 +40,9 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.activity_signup);
+            editTextMonth =findViewById(R.id.editText_Month);
+            editTextDay = findViewById(R.id.editText_day);
+            editTextYear =findViewById(R.id.editText_Year);
             editTextUsername=findViewById(R.id.editText_username);
             editTextRole=findViewById(R.id.role_type);
             editTextName = findViewById(R.id.edit_text_name);
@@ -89,6 +92,9 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
             final String name = editTextName.getText().toString().trim();
             final String username = editTextUsername.getText().toString().trim();
+            final String day=editTextDay.getText().toString().trim();
+            final String month=editTextMonth.getText().toString().trim();
+            final String year=editTextYear.getText().toString().trim();
 
             final String email = editTextEmail.getText().toString().trim();
             final String last = editTextLastName.getText().toString().trim();
@@ -100,6 +106,21 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             if (name.isEmpty()) {
                 editTextName.setError(getString(R.string.input_error_first_name));
                 editTextName.requestFocus();
+                return;
+            }
+            if (day.isEmpty()) {
+                editTextDay.setError(getString(R.string.input_error_day));
+                editTextDay.requestFocus();
+                return;
+            }
+            if (month.isEmpty()) {
+                editTextMonth.setError(getString(R.string.input_error_month));
+                editTextMonth.requestFocus();
+                return;
+            }
+            if (year.isEmpty()) {
+                editTextYear.setError(getString(R.string.input_error_year));
+                editTextYear.requestFocus();
                 return;
             }
 
@@ -139,7 +160,22 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextPassword.requestFocus();
                 return;
             }
-
+            
+            if (day.matches("[0-9]+") && day.length() != 2) {
+                editTextDay.setError(getString(R.string.input_error_day_length));
+                editTextDay.requestFocus();
+                return;
+            }
+            if (month.matches("[0-9]+") && month.length() != 2) {
+                editTextMonth.setError(getString(R.string.input_error_month_length));
+                editTextMonth.requestFocus();
+                return;
+            }
+            if (year.matches("[0-9]+") && year.length() != 4) {
+                editTextYear.setError(getString(R.string.input_error_year_length));
+                editTextYear.requestFocus();
+                return;
+            }
             if (phone.isEmpty()) {
                 editTextPhone.setError(getString(R.string.input_error_phone));
                 editTextPhone.requestFocus();
@@ -218,7 +254,10 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                                                                 email,
                                                                 phone,
                                                                 address,
-                                                                role
+                                                                role,
+                                                                day,
+                                                                month,
+                                                                year
 
                                                         );
 
