@@ -84,6 +84,14 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
 
                 textViewUser.setText("Welcome " + name + " you are logged in as " + role);
+           /*     for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    String username = ds.child("username").getValue(String.class);
+                    textViewUser.setText(username);
+                }
+*/
+
+
             /*   if (role.equals("Admin")) {
 
                     for (DataSnapshot ds : dataSnapshot.getChildren()) {
@@ -108,6 +116,38 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             public void onCancelled(DatabaseError databaseError) {}
         };
         uidRef.addListenerForSingleValueEvent(eventListener);
+
+
+
+
+/*
+        DatabaseReference reef = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference ref = rootRef.child("Users");
+        ValueEventListener eventListener1 = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+
+
+                //textViewUser.setText("Welcome " + name + " you are logged in as " + role);
+                for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                    String username = ds.child("username").getValue(String.class);
+                    textViewUser.setText(username);
+                }
+
+
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {}
+        };
+        ref.addListenerForSingleValueEvent(eventListener1);
+
+
+*/
+
 
     }
 
