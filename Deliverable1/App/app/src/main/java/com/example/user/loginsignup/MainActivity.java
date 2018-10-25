@@ -1,6 +1,5 @@
 package com.example.user.loginsignup;
 
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -69,8 +68,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             return;
         }
 
-        //if the email and password are not empty
-        //displaying a progress dialog
+
 
 
         //logging in the user
@@ -80,13 +78,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         //if the task is successfull
                         if (task.isSuccessful()) {
-                            //start the profile activity
+                            //start the welcome activity
                             finish();
                             startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
 
                             Toast.makeText(MainActivity.this, getString(R.string.signin_success), Toast.LENGTH_LONG).show();
 
                         } else {
+                            //sign in failed stay in log in page(main activity) and tell user that sign in failed
                             Toast.makeText(MainActivity.this, getString(R.string.sigin_fail), Toast.LENGTH_LONG).show();
 
                         }
@@ -94,6 +93,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 });
     }
         public void signup(){
+        // goes to signup activity
             Intent intent = new Intent(this, SignupActivity.class);
             startActivity(intent);
         }
@@ -101,11 +101,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+        //if button pressed
         if(view == buttonSignIn){
+            //does log in function
             userLogin();
         }
-
+            // if button pressed
         if(view == btnSignup){
+            //do the signup function
             signup();
             finish();
         }
