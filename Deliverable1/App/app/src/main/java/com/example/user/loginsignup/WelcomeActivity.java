@@ -32,7 +32,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
     //view objects
     private Button buttonLogout;
     private MultiAutoCompleteTextView textViewUser;
-    private ArrayList<String> iteam;
+    private ArrayList<String> array;
     private ListView listView;
 
     // private String name,role;
@@ -48,7 +48,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
         //if the user is not logged in
         //that means current user will return null
-        if(firebaseAuth.getCurrentUser() == null){
+        if (firebaseAuth.getCurrentUser() == null) {
             //closing this activity
             finish();
             //starting login activity
@@ -59,10 +59,10 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
         //initializing views
-        iteam =new ArrayList<String>();
+        array = new ArrayList<String>();
         textViewUser = (MultiAutoCompleteTextView) findViewById(R.id.editTextWelcome);
         buttonLogout = (Button) findViewById(R.id.logout);
-        listView=(ListView) findViewById(R.id.listUser);
+        listView = (ListView) findViewById(R.id.listUser);
 
 
         //displaying logged in user name
@@ -82,8 +82,38 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
                 String role = dataSnapshot.child("role").getValue(String.class);
 
 
-
                 textViewUser.setText("Welcome " + name + " you are logged in as " + role);
+                if (role.equals("Admin")){
+                    DatabaseReference rotRef = FirebaseDatabase.getInstance().getReference();
+
+                    DatabaseReference usersdRef = rotRef.child("Users");
+
+                    ValueEventListener eventListener1 = new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            for (DataSnapshot ds : dataSnapshot.getChildren()) {
+
+                                String username = ds.child("username").getValue(String.class);
+
+                                Log.d("TAG", username);
+
+                                array.add(username);
+
+                            }
+                            ArrayAdapter<String> adapter = new ArrayAdapter(WelcomeActivity.this, android.R.layout.simple_list_item_1, array);
+
+                            listView.setAdapter(adapter);
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    };
+                    usersdRef.addListenerForSingleValueEvent(eventListener1);
+
+                }
            /*     for (DataSnapshot ds : dataSnapshot.getChildren()) {
 
                     String username = ds.child("username").getValue(String.class);
@@ -113,7 +143,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {}
+            public void onCancelled(DatabaseError databaseError) {
+            }
         };
         uidRef.addListenerForSingleValueEvent(eventListener);
 
@@ -147,6 +178,8 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
 
 
 */
+
+//to fetch all the users of firebase Auth app
 
 
     }
