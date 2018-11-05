@@ -33,6 +33,10 @@
     <string name="signin_success">Signed in Successfully</string>
     <string name="sigin_fail">Signing in failed</string>
 
+    <string name="admin">Admin</string>
+    <string name="sp">Service Provider</string>
+    <string name="hm">Home Owner</string>
+
     <string name="registration_success">Registered Successfully</string>
     <string name="input_error_email_invalid">enter a valid email</string>
 </resources>
