@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/SEG2105-Project/Deliverable2/App
     docker:
-      - image: circleci/android:api-26
+      - image: circleci/android:api-26-aplha
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
