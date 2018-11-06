@@ -91,6 +91,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextName.requestFocus();
                 return;
             }
+
             if (day.isEmpty()) {
                 editTextDay.setError(getString(R.string.input_error_day));
                 editTextDay.requestFocus();
@@ -149,6 +150,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextDay.requestFocus();
                 return;
             }
+
+
             if (month.matches("[0-9]+") && month.length() != 2) {
                 editTextMonth.setError(getString(R.string.input_error_month_length));
                 editTextMonth.requestFocus();

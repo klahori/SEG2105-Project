@@ -16,6 +16,7 @@
     <string name="input_error_day_length">day should be 2 numbers long</string>
     <string name="input_error_month_length">month should be 2 numbers long</string>
     <string name="input_error_year_length">year should be 4 numbers long</string>
+    <string name="nameError">Sorry a name can only contain letters and a -</string>
 
 
     <string name="input_error_first_name">first name required</string>
