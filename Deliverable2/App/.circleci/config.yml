@@ -1,7 +1,7 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/App
+    working_directory: ~/SEG2105-Project/Deliverable2/App
     docker:
       - image: circleci/android:api-26
     environment:
