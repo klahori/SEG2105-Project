@@ -1,6 +1,7 @@
 package com.example.user.loginsignup;
 
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -9,6 +10,8 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -25,7 +28,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
         private ProgressBar progressBar;
         private FirebaseAuth mAuth;
         private  String Admin;
-
+        private String roleT;
+        private RadioGroup roleType;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -35,7 +39,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             editTextDay = findViewById(R.id.editText_day);
             editTextYear =findViewById(R.id.editText_Year);
             editTextUsername=findViewById(R.id.editText_username);
-            editTextRole=findViewById(R.id.role_type);
+                //editTextRole=findViewById(R.id.role_type);
             editTextName = findViewById(R.id.edit_text_name);
             editTextLastName = findViewById(R.id.lastName);
             editTextAddress = findViewById(R.id.address);
@@ -46,7 +50,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             progressBar.setVisibility(View.GONE);
             //getting firebase auth object
             mAuth = FirebaseAuth.getInstance();
-
+            //Radio Buttons
+            roleType = findViewById(R.id.role_type);
             findViewById(R.id.button_register).setOnClickListener(this);
         }
 
@@ -78,7 +83,8 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
             final String address = editTextAddress.getText().toString().trim();
             final String password = editTextPassword.getText().toString().trim();
             final String phone = editTextPhone.getText().toString().trim();
-            final String role = editTextRole.getText().toString().trim();
+            //final String role = editTextRole.getText().toString().trim();
+            final String role = roleT;
 // validation texts cannot be left empty
             if (name.isEmpty()) {
                 editTextName.setError(getString(R.string.input_error_first_name));
@@ -165,16 +171,17 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 editTextPhone.requestFocus();
                 return;
             }
-            if (role.isEmpty()) {
-                editTextRole.setError(getString(R.string.input_error_role));
-                editTextRole.requestFocus();
-                return;
-            }
+            if(roleType.getCheckedRadioButtonId() == -1) {
+                Context context = getApplicationContext();
+                //CharSequence text = "Hello toast!";
+                int duration = Toast.LENGTH_SHORT;
 
-                // role can only be Admin Service Provider or Home Owner
-            if (!(role.equals("Admin") || role.equals("Service Provider") || role.equals("Home Owner"))) {
-                editTextRole.setError(getString(R.string.input_error_role_invalid));
-                editTextRole.requestFocus();
+                Toast toast = Toast.makeText(context, getString(R.string.input_error_role), duration);
+                toast.show();
+
+                //Toast.makeText(SignupActivity.this, getString(R.string.input_error_role), Toast.LENGTH_LONG).show();
+                //editTextRole.setError(getString(R.string.input_error_role));
+                //editTextRole.requestFocus();
                 return;
             }
 
@@ -207,9 +214,12 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
                                 if (dataSnapshot.exists()) {
-                                    editTextRole.setError(getString(R.string.input_error_admin));//if there already is an admin account give an error since we can only have one admin account
-                                    editTextRole.requestFocus();
-
+                                    //editTextRole.setError(getString(R.string.input_error_admin));//if there already is an admin account give an error since we can only have one admin account
+                                    //editTextRole.requestFocus();
+                                    Context context = getApplicationContext();
+                                    int duration = Toast.LENGTH_SHORT;
+                                    Toast toast = Toast.makeText(context, getString(R.string.input_error_admin), duration);
+                                    toast.show();
                                 } else
 
                                 {
@@ -283,6 +293,31 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
         }
 
+        //Radio Buttons
+        public void onRadioButtonClicked(View view) {
+
+            // Is the button now checked?
+            boolean checked = ((RadioButton) view).isChecked();
+
+            // Check which radio button was clicked
+            switch(view.getId()) {
+                case R.id.radio_admin:
+                    if (checked)
+                        // Admin
+                        roleT = "Admin";
+                    break;
+                case R.id.radio_sp:
+                    if (checked)
+                        // Service Provider
+                        roleT = "Home Owner";
+                    break;
+                case R.id.radio_hm:
+                    if (checked)
+                        // Home Owner
+                        roleT = "Service Provider";
+                    break;
+            }
+        }
 
 
 
