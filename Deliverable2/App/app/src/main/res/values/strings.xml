@@ -37,13 +37,10 @@
     <string name="service_added">Service has been added Successfully</string>
     <string name="service_fail">Service had not been added due to an error</string>
 
-<<<<<<< HEAD
-=======
     <string name="admin">Admin</string>
     <string name="sp">Service Provider</string>
     <string name="hm">Home Owner</string>
 
     <string name="registration_success">Registered Successfully</string>
->>>>>>> bb2861f6a4c40c3fa878f72a201363771db472b4
     <string name="input_error_email_invalid">enter a valid email</string>
 </resources>
