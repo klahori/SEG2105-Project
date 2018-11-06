@@ -2,10 +2,6 @@ version: 2
 jobs:
   build:
     working_directory: ~/SEG2105-Project/Deliverable2/App
-    steps:
-      -checkout:
-        path: ~/SEG2105-Project/Deliverable2/App
-      - run:
     docker:
       - image: circleci/android:api-26-aplha
     environment:
