@@ -1,9 +1,9 @@
 version: 2
 jobs:
   build:
-    working_directory: ~/SEG2105-Project/Deliverable2/App
+    working_directory: ~/App
     docker:
-      - image: circleci/android:api-28-alpha
+      - image: circleci/android:api-26
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
@@ -11,7 +11,7 @@ jobs:
       - restore_cache:
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-         name: Chmod permissions  
+         name: Chmod permissions
          command: sudo chmod +x ./gradlew
       - run:
           name: Download Dependencies
@@ -21,11 +21,10 @@ jobs:
             - ~/.gradle
           key: jars-{{ checksum "build.gradle" }}-{{ checksum  "app/build.gradle" }}
       - run:
-           name: Run UnitTest
-           command: ./gradlew test
-       - store_artifacts:
-           path: app/build/outputs/apk/debug/
-           destination: apks/
-       - store_test_results:
-           path: app/build/test-results
-  
+          name: Run UnitTest
+          command: ./gradlew test
+      - store_artifacts:
+          path: app/build/outputs/apk/debug/
+          destination: apks/
+      - store_test_results:
+          path: app/build/test-results
