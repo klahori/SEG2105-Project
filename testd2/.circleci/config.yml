@@ -2,8 +2,6 @@ version: 2
 jobs:
   build:
     working_directory: ~/SEG2105-Project/testd2
-     - checkout:
-          path: ~/SEG2105-Project
     docker:
       - image: circleci/android:api-26
     environment:
