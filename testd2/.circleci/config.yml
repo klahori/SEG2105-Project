@@ -4,8 +4,9 @@ jobs:
     working_directory: ~/SEG2105-Project/testd2
      - checkout:
           path: ~/SEG2105-Project
+      -run:
     docker:
-      - image: circleci/android:api-26-beta
+      - image: circleci/android:api-26
     environment:
       JVM_OPTS: -Xmx3200m
     steps:
