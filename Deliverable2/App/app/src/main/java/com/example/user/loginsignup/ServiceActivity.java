@@ -110,7 +110,20 @@ public class ServiceActivity extends AppCompatActivity   {
                                 @Override
                                 public void onClick(View view) {
                                     String name = editTextName.getText().toString().trim();
+
+                                    String priceE=editTextPrice.getText().toString().trim();
+                                    if (name.isEmpty()) {
+                                        editTextName.setError(getString(R.string.no_serviceName2));
+                                        editTextName.requestFocus();
+                                        return;
+                                    }
+                                    if (priceE.isEmpty()) {
+                                        editTextPrice.setError(getString(R.string.noPrice));
+                                        editTextPrice.requestFocus();
+                                        return;
+                                    }
                                     double price = Double.parseDouble(String.valueOf(editTextPrice.getText().toString()));
+
                                     if (!TextUtils.isEmpty(name)) {
                                         updateService(serviceId, name, price);
                                         b.dismiss();
@@ -143,7 +156,21 @@ public class ServiceActivity extends AppCompatActivity   {
 
                         private void addService() {
                             String name = editTextName.getText().toString().trim();
+                            String priceE=editTextCost.getText().toString().trim();
+                            if (name.isEmpty()) {
+                                editTextName.setError(getString(R.string.no_serviceName));
+                                editTextName.requestFocus();
+                                return;
+                            }
+                            if (priceE.isEmpty()) {
+                                editTextCost.setError(getString(R.string.noPrice));
+                                editTextCost.requestFocus();
+                                return;
+
+                            }
                             double price=Double.parseDouble(String.valueOf(editTextCost.getText().toString()));
+
+
                             if (!TextUtils.isEmpty(name)){
                                 String id= databaseService.push().getKey();
                                 Service service = new Service(id,name,price);

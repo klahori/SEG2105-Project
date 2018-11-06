@@ -22,7 +22,10 @@
     <string name="input_error_last_name">last name required</string>
     <string name="input_error_role">role required</string>
     <string name="input_error_admin">Admin already exists</string>
+    <string name="no_serviceName">Please enter the service name</string>
+    <string name="no_serviceName2">Please enter the service name if you want you keep the service name you will have to write it again</string>
 
+    <string name="noPrice">Please enter the price per hour</string>
     <string name="input_error_role_invalid">enter a valid role make sure to check spelling</string>
 
     <string name="input_error_email">email required</string>
