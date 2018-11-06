@@ -7,7 +7,8 @@
     <string name="password">password</string>
     <string name="phone">phone</string>
     <string name="address">address</string>
-
+    <string name="input_error_service">Service name is required</string>
+    <string name="input_error_price">Price per hour is required</string>
     <string name="register">Register</string>
     <string name="input_error_day">day of birth required</string>
     <string name="input_error_month">month of birth required</string>
@@ -32,7 +33,9 @@
     <string name="input_error_address">address required</string>
     <string name="signin_success">Signed in Successfully</string>
     <string name="sigin_fail">Signing in failed</string>
+    <string name="registration_Success">You have been Registered Successfully</string>
+    <string name="service_added">Service has been added Successfully</string>
+    <string name="service_fail">Service had not been added due to an error</string>
 
-    <string name="registration_success">Registered Successfully</string>
     <string name="input_error_email_invalid">enter a valid email</string>
 </resources>

@@ -29,7 +29,6 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
     //firebase auth object
     private FirebaseAuth firebaseAuth;
     //defining views
-    private Button buttonLogout,buttonServices;
     private MultiAutoCompleteTextView textViewUser;
     private ArrayList<String> array;
     private ListView listView;
@@ -59,13 +58,12 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
         //initializing views
         array = new ArrayList<String>();
         textViewUser = (MultiAutoCompleteTextView) findViewById(R.id.editTextWelcome);
-        buttonLogout = (Button) findViewById(R.id.logout);
+        findViewById(R.id.logout).setOnClickListener(this);
         listView = (ListView) findViewById(R.id.listUser);
-        buttonServices = (Button) findViewById(R.id.services);
+        findViewById(R.id.serviceBtn).setOnClickListener(this);
 
 
         //adding listener to button
-        buttonLogout.setOnClickListener(this);
 
         //getting the user special id from logged in user
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -122,18 +120,18 @@ public class AdminActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        //if logout is pressed
-        if (view == buttonLogout) {
-            //logging out the user
-            firebaseAuth.signOut();
-            //closing activity
-            finish();
-            //starting login activity
-            startActivity(new Intent(this, MainActivity.class));
-        }
-        if(view == buttonServices) {
-            //starting login activity
-            startActivity(new Intent(this, ServiceActivity.class));
+        switch (view.getId()) {
+            case R.id.logout:// if register button pressed
+                //logging out the user
+                firebaseAuth.signOut();
+                //closing activity
+                finish();
+                //starting login activity
+                startActivity(new Intent(this, MainActivity.class));
+                break;
+            case R.id.serviceBtn:// if register button pressed
+                startActivity(new Intent(this, ServiceActivity.class));
+                break;
         }
     }
 }

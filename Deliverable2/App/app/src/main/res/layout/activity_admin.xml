@@ -26,7 +26,7 @@
                 tools:layout_editor_absoluteY="227dp" />
 
             <Button
-                android:id="@+id/services"
+                android:id="@+id/serviceBtn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

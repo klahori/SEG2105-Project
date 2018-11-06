@@ -6,32 +6,44 @@
     android:layout_height="match_parent"
     tools:context=".ServiceActivity">
 
-    <LinearLayout
+
+    <EditText
+        android:id="@+id/editTextService"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:hint="Enter the Service"
+        android:inputType="textPersonName" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+    <EditText
+        android:id="@+id/editTextCost"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextService"
+        android:hint="Price Per Hour"
+        android:inputType="numberDecimal" />
 
-            <EditText
-                android:id="@+id/editText3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="Name" />
+    <Button
+        android:id="@+id/addButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextCost"
+        android:layout_weight="1"
+        android:layout_centerInParent="true"
+        android:text="Add" />
 
-            <EditText
-                android:id="@+id/editText4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:ems="10"
-                android:inputType="numberDecimal" />
-        </LinearLayout>
-    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/addButton"
+        android:text="Services"
+        android:textAlignment="center" />
+
+    <ListView
+        android:id="@+id/listViewServices"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"></ListView>
+
 </RelativeLayout>

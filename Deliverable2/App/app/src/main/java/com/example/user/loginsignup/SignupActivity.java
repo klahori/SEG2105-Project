@@ -239,6 +239,9 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
 
                                                         );
 
+
+
+
                                                         FirebaseDatabase.getInstance().getReference("Users")
                                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -247,7 +250,7 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                                                                 progressBar.setVisibility(View.GONE);
                                                                 if (task.isSuccessful()) {
                                                                     goBack();//if user account was made follow go back function
-                                                                    Toast.makeText(SignupActivity.this, getString(R.string.registration_success), Toast.LENGTH_LONG).show();// tell the user account was made
+                                                                    Toast.makeText(SignupActivity.this, getString(R.string.registration_Success), Toast.LENGTH_LONG).show();// tell the user account was made
                                                                 } else {
                                                                     //display a failure message
                                                                 }
