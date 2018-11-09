@@ -4,6 +4,7 @@
 Repository link for CircleCI testing: https://github.com/klahori/seg2105-projectCircle<br />
  Group Members: Khyber Lahori, Abdullah Khalid, Osama-Al-Mazloum, Riyanson Alfred<br />
  Admin can be created although we have already created one in our firebase database and no more then one admin for the app can be created<br />
+ For CircleCI we needed to use another repository since it wasnt able to be built here  due to constraints in circleCI the link to that repository can be found above also a link showing the circleCI test succeeding can be found in the Deliverable2_sumit folder under the name circleCI_proof<br/> 
 **Email:** 123@gmail.com<br />
 **Password:** 123123<br />
  **How to use services**
