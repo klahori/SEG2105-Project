@@ -6,7 +6,7 @@
 * Admin can be created although we have already created one in our firebase database and no more then one admin for the app can be created
 * Email:123@gmail.com
 * Password:123123
-How to use services
+**How to use services**
 * login as an admin(email password provided above)
 * hit the services button
 * to add services enter a service name and the price per hour and hit the add button
