@@ -312,12 +312,12 @@ public class SignupActivity extends AppCompatActivity  implements View.OnClickLi
                 case R.id.radio_sp:
                     if (checked)
                         // Service Provider
-                        roleT = "Home Owner";
+                        roleT = "Service Provider";
                     break;
                 case R.id.radio_hm:
                     if (checked)
                         // Home Owner
-                        roleT = "Service Provider";
+                        roleT = "Home Owner";
                     break;
             }
         }
