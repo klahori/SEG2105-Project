@@ -12,6 +12,22 @@
         android:orientation="vertical">
 
         <EditText
+            android:id="@+id/phoneNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Phone Number"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Address"
+            android:inputType="textPersonName" />
+
+        <EditText
             android:id="@+id/companyName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,34 +41,20 @@
             android:layout_height="wrap_content"
             tools:hint="Description" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/licensed"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Are you Licenced please type Yes or No"
+            android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/textLicensed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Are you Licensed"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-                android:textSize="16sp" />
-
-            <RadioButton
-                android:id="@+id/yesBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Yes" />
-
-            <RadioButton
-                android:id="@+id/noBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="No" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/submitBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Submit" />
 
     </LinearLayout>
+
 </RelativeLayout>

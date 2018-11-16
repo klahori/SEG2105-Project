@@ -71,6 +71,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
         String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         DatabaseReference rootRef = FirebaseDatabase.getInstance().getReference();
+
         //going through database user and special id  to get to the specific user logged in
         DatabaseReference uidRef = rootRef.child("Users").child(uid);
         ValueEventListener eventListener = new ValueEventListener() {
@@ -92,7 +93,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
         uidRef.addListenerForSingleValueEvent(eventListener);
         DatabaseReference rotRef = FirebaseDatabase.getInstance().getReference();
         //starting point is set in the data base of users
-        DatabaseReference usersdRef = rotRef.child("Users");
+        DatabaseReference usersdRef = rotRef.child("Services");
         ValueEventListener eventListener1 = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -100,7 +101,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
 
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     // gets all users usernames
-                    String username = ds.child("username").getValue(String.class);
+                    String username = ds.child("serviceName").getValue(String.class);
                     Log.d("TAG", username);
                     // adds all usernames in an arraylist
                     array.add(username);

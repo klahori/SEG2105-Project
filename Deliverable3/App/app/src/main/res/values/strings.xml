@@ -20,6 +20,12 @@
     <string name="invalid_year">Please choose a current or future year</string>
     <string name="invalid_day">Please choose a current or future day</string>
     <string name="invalid_month">Please choose a current or future month</string>
+    <string name="companyError">Company name required</string>
+    <string name="sHourError">Please choose your starting hour time in the present or future</string>
+    <string name="sMinuteError">Please choose  a minute time in the present or future</string>
+    <string name="eHourError">Please choose your ending hour greater than or equal to your starting hour</string>
+    <string name="eMinuteError">Please choose  a ending minute greater than or equal to your starting minute</string>
+    <string name="updatedInfo">Successfully updated your information</string>
 
 
     <string name="input_error_first_name">first name required</string>

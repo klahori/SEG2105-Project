@@ -23,7 +23,7 @@
         <activity android:name=".ProductList" />
         <activity android:name=".ServiceProviderActivity" />
         <activity android:name=".ProfileActivity" />
-        <activity android:name=".ServicePActivity"></activity>
+        <activity android:name=".ServicePActivity" />
     </application>
 
 </manifest>
