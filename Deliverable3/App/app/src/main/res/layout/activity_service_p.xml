@@ -6,41 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".ServicePActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollojt"
+        android:fillViewport="true" >
 
-        <EditText
-            android:id="@+id/et_show_date_time"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/btn_set_date_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="set" />
+            <ListView
+                android:id="@+id/listView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:background="#f00"></ListView>
 
-        <EditText
-            android:id="@+id/test1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
+            <ListView
+                android:id="@+id/listView2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/listView1"
+                android:background="#0f0" >
+            </ListView>
+        </RelativeLayout>
+    </ScrollView>
 
-        <EditText
-            android:id="@+id/test2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="textPersonName" />
-
-        <ListView
-            android:id="@+id/listViewAvilability"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
 </RelativeLayout>
