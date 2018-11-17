@@ -24,6 +24,7 @@
         <activity android:name=".ServiceProviderActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ServicePActivity" />
+        <activity android:name=".AdminServicesActivity"></activity>
     </application>
 
 </manifest>
