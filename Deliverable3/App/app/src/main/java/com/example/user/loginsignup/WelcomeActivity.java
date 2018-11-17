@@ -73,7 +73,7 @@ public class WelcomeActivity extends AppCompatActivity implements View.OnClickLi
         ValueEventListener eventListener = new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                //getting the name and role of logged in user
+                //getting the name and role of ogged in user
                 String name = dataSnapshot.child("firstName").getValue(String.class);
                 String role = dataSnapshot.child("role").getValue(String.class);
                     // setting the text so it welcome the user by first name and tells them they are logged in as the role they  have

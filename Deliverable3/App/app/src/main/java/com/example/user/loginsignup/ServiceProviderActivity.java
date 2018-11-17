@@ -2,6 +2,7 @@ package com.example.user.loginsignup;
 
 
 import android.app.DatePickerDialog;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
@@ -18,6 +19,7 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.MultiAutoCompleteTextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.user.loginsignup.MainActivity;
@@ -77,6 +79,29 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
         listViewAval = (ListView) findViewById(R.id.listViewAvilability);
 
 
+        //getting the user special id from logged in user
+        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        DatabaseReference rootRef3 = FirebaseDatabase.getInstance().getReference();
+        //going through database user and special id  to get to the specific user logged in
+        DatabaseReference uidRef = rootRef3.child("Users").child(uid);
+        ValueEventListener eventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                //getting the name and role of logged in user
+                String name = dataSnapshot.child("firstName").getValue(String.class);
+                String role = dataSnapshot.child("role").getValue(String.class);
+                // setting the text so it welcome the user by first name and tells them they are logged in as the role they  have
+                textViewUser.setText("Welcome " + name + " you are logged in as " + role);
+                //if users role is admin
+            }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                }
+            };
+                    uidRef.addListenerForSingleValueEvent(eventListener);
+
+
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
         //getting the user special id from logged in userFirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -128,13 +153,8 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
     }
 
 
-        private void pickDate(){
+        private String pickDate(){
             // Get Current Date
-            LayoutInflater inflater = getLayoutInflater();
-            final View dialogView = inflater.inflate(R.layout.update_aval, null);
-
-
-
 
             final Calendar m = Calendar.getInstance();
             Date date = new Date();
@@ -146,7 +166,6 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
             mYear = m.get(Calendar.YEAR);
             mMonth = m.get(Calendar.MONTH);
             mDay = m.get(Calendar.DAY_OF_MONTH);
-
 
 
             DatePickerDialog datePickerDialog = new DatePickerDialog(this,
@@ -182,16 +201,112 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                                 toast.show();
                                 return;
                             }
+
                             dateup ="Date: " +day + "-" + (month+1) + "-" + year;
                             //*************Call Time Picker Here ********************
+                            Context context = getApplicationContext();
+
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, ("you choose"+dateup), duration);
+                            toast.show();
                         }
 
                     }, mYear, mMonth, mDay);
 
             datePickerDialog.show();
+            return dateup;
         }
 
+    private String EndTime() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        eHour = c.get(Calendar.HOUR_OF_DAY);
+        eMinute = c.get(Calendar.MINUTE);
 
+        // Launch Time Picker Dialog
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                        if (hourOfDay < sHour) {
+                            Context context = getApplicationContext();
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, getString(R.string.sHourError), duration);
+                            toast.show();
+                            return;
+                        }
+                        if (minute < sMinute && hourOfDay == sHour) {
+                            Context context = getApplicationContext();
+                            int duration = Toast.LENGTH_SHORT;
+
+                            Toast toast = Toast.makeText(context, getString(R.string.sMinuteError), duration);
+                            toast.show();
+                            return;
+                        }
+
+                        eHour = hourOfDay;
+                        eMinute = minute;
+                        endTime = " End Time: " + hourOfDay + ":" + minute;
+                        Context context = getApplicationContext();
+
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, ("you choose"+endTime), duration);
+                        toast.show();
+                    }
+
+                }, eHour, eMinute, false);
+        timePickerDialog.show();
+    return endTime;
+    }
+
+
+
+
+    private String StartingTime() {
+        // Get Current Time
+        final Calendar c = Calendar.getInstance();
+        sHour = c.get(Calendar.HOUR_OF_DAY);
+        sMinute = c.get(Calendar.MINUTE);
+
+        // Launch Time Picker Dialog
+        TimePickerDialog stimePickerDialog = new TimePickerDialog(this,
+                new TimePickerDialog.OnTimeSetListener() {
+
+                    @Override
+                    public void onTimeSet(TimePicker view, int shourOfDay, int sminute) {
+                        if (shourOfDay < sHour) {
+                            Context context = getApplicationContext();
+                            int duration = Toast.LENGTH_LONG;
+
+                            Toast toast = Toast.makeText(context, getString(R.string.sHourError), duration);
+                            toast.show();
+                            return;
+                        }
+                        if (sminute < sMinute && shourOfDay == sHour) {
+                            Context context = getApplicationContext();
+                            int duration = Toast.LENGTH_LONG;
+
+                            Toast toast = Toast.makeText(context, getString(R.string.sMinuteError), duration);
+                            toast.show();
+                            return;
+                        }
+
+                        startTime = " Start time: " + shourOfDay + ":" + sminute;
+                        Context context = getApplicationContext();
+
+                        int duration = Toast.LENGTH_SHORT;
+
+                        Toast toast = Toast.makeText(context, ("you choose"+startTime), duration);
+                        toast.show();
+                    }
+                }, sHour, sMinute, false);
+        stimePickerDialog.show();
+        return startTime;
+    }
 
         @Override
         protected void onStart() {
@@ -212,13 +327,15 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
             final EditText editTextDate = (EditText) dialogView.findViewById(R.id.editTextDate);
             final EditText editTextsTime  = (EditText) dialogView.findViewById(R.id.editTextsTime);
             final EditText editTexteTime  = (EditText) dialogView.findViewById(R.id.editTexteTime);
-
             final Button buttonUpdate = (Button) dialogView.findViewById(R.id.buttonUpdateProduct);
+            final Button dateConfirm = (Button) dialogView.findViewById(R.id.buttonConfirm);
+            final Button startTimeConfirm = (Button) dialogView.findViewById(R.id.buttonStartTimeConfirm);
+            final Button endTimeConfirm = (Button) dialogView.findViewById(R.id.buttonEndTimeConfirm);
+
             final Button buttonDelete = (Button) dialogView.findViewById(R.id.buttonDeleteProduct);
             final Button dateUpdate = (Button) dialogView.findViewById(R.id.dateBtn);
             final Button startTimeUpdate = (Button) dialogView.findViewById(R.id.startBtn);
             final Button endTimeUpdate = (Button) dialogView.findViewById(R.id.endBtn);
-            editTextDate.setText(dateup);
 
             dialogBuilder.setTitle(avaliableDate);
             final AlertDialog b = dialogBuilder.create();
@@ -236,17 +353,17 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
 
 
                     if (date.isEmpty()) {
-                        editTextDate.setError(getString(R.string.no_serviceName2));
+                        editTextDate.setError(getString(R.string.dateError));
                         editTextDate.requestFocus();
                         return;
                     }
                     if (sTime.isEmpty()) {
-                        editTextsTime.setError(getString(R.string.noPrice));
+                        editTextsTime.setError(getString(R.string.sTimeError));
                         editTextsTime.requestFocus();
                         return;
                     }
                     if (eTime.isEmpty()) {
-                        editTexteTime.setError(getString(R.string.noPrice));
+                        editTexteTime.setError(getString(R.string.eTimeError));
                         editTexteTime.requestFocus();
                         return;
                     }
@@ -267,11 +384,55 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                 @Override
                 public void onClick(View view) {
                     pickDate();
-
+                }
+            });
+            dateConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                editTextDate.setText(dateup);
 
 
                 }
             });
+
+
+            startTimeUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    StartingTime();
+                }
+            });
+            startTimeConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editTextsTime.setText(startTime);
+
+
+                }
+            });
+
+
+
+
+
+
+
+            endTimeUpdate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    EndTime();
+                }
+            });
+            endTimeConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    editTexteTime.setText(endTime);
+
+
+                }
+            });
+
+
 
             buttonDelete.setOnClickListener(new View.OnClickListener() {
                 @Override

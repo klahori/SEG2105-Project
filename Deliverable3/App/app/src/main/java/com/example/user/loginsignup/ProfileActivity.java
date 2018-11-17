@@ -86,7 +86,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         addressEdit = (EditText) findViewById(R.id.address);
         companyEdit = (EditText) findViewById(R.id.companyName);
         licenceEdit = findViewById(R.id.licensed);
-        descriptionEdit = findViewById(R.id.description);
+        descriptionEdit =(MultiAutoCompleteTextView) findViewById(R.id.description);
 
         findViewById(R.id.submitBtn).setOnClickListener(this);
 
@@ -124,7 +124,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 if (description != null) {
                     descriptionEdit.setText(description);
-                } else {
+                }
+                else {
                     descriptionEdit.setHint("Please enter a description about yourself");
                 }
             }
@@ -168,6 +169,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 if (companyNamef.isEmpty()) {
                     companyEdit.setError(getString(R.string.companyError));
                     companyEdit.requestFocus();
+                    return;
+                }
+                if (phoneNumber.isEmpty()) {
+                    phoneNumEdit.setError(getString(R.string.input_error_phone));
+                    phoneNumEdit.requestFocus();
+                    return;
+                }
+                if (address.isEmpty()) {
+                    addressEdit.setError(getString(R.string.input_error_address));
+                    addressEdit.requestFocus();
                     return;
                 }
 
