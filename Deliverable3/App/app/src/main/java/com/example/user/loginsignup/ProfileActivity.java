@@ -318,6 +318,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             toast.show();
                             return;
                         }
+                        sHour=shourOfDay;
+                        sMinute=sminute;
 
                         startTime = " Start time: " + shourOfDay + ":" + sminute;
 

@@ -234,7 +234,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                             Context context = getApplicationContext();
                             int duration = Toast.LENGTH_SHORT;
 
-                            Toast toast = Toast.makeText(context, getString(R.string.sHourError), duration);
+                            Toast toast = Toast.makeText(context, getString(R.string.eHourError), duration);
                             toast.show();
                             return;
                         }
@@ -242,7 +242,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                             Context context = getApplicationContext();
                             int duration = Toast.LENGTH_SHORT;
 
-                            Toast toast = Toast.makeText(context, getString(R.string.sMinuteError), duration);
+                            Toast toast = Toast.makeText(context, getString(R.string.eMinuteError), duration);
                             toast.show();
                             return;
                         }
@@ -294,7 +294,8 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                             toast.show();
                             return;
                         }
-
+                        sHour=shourOfDay;
+                        sMinute=sminute;
                         startTime = " Start time: " + shourOfDay + ":" + sminute;
                         Context context = getApplicationContext();
 
