@@ -55,6 +55,7 @@ public class AdminServicesActivity extends AppCompatActivity implements View.OnC
 
         databaseService = FirebaseDatabase.getInstance().getReference("Services");
         services = new ArrayList<>();
+        findViewById(R.id.backButton).setOnClickListener(this);
 
 
         super.onStart();
@@ -170,6 +171,8 @@ public class AdminServicesActivity extends AppCompatActivity implements View.OnC
                 //logging out the user
                 startActivity(new Intent(this, ServicePActivity.class));
                 break;
+
+
 
         }
     }

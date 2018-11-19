@@ -54,6 +54,7 @@ public class ServicePActivity extends AppCompatActivity implements View.OnClickL
 
         listViewService = (ListView) findViewById(R.id.listView);
         databaseService  = rootRef.child("Users").child(firebaseUser.getUid()).child("Service");
+        findViewById(R.id.back).setOnClickListener(this);
 
         findViewById(R.id.goToAdd).setOnClickListener(this);
 
@@ -151,6 +152,10 @@ public class ServicePActivity extends AppCompatActivity implements View.OnClickL
             case R.id.goToAdd:// if register button pressed
                 //logging out the user
                 startActivity(new Intent(this, AdminServicesActivity.class));
+                break;
+            case R.id.back:// if register button pressed
+                //logging out the user
+                startActivity(new Intent(this, ServiceProviderActivity.class));
                 break;
 
         }

@@ -91,6 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.submitBtn).setOnClickListener(this);
 
         findViewById(R.id.btn_set_date_time).setOnClickListener(this);
+        findViewById(R.id.backBtn).setOnClickListener(this);
 
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -112,6 +113,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 // setting the text so it welcome the user by first name and tells them they are logged in as the role they  have
                 phoneNumEdit.setText(phoneNumber);
                 addressEdit.setText(address);
+
                 if (companyName != null) {
                     companyEdit.setText(companyName);
                 } else {
@@ -128,6 +130,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 else {
                     descriptionEdit.setHint("Please enter a description about yourself");
                 }
+
             }
 
             @Override
@@ -160,7 +163,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 String role = dataSnapshot.child("role").getValue(String.class);
                 String username = dataSnapshot.child("username").getValue(String.class);
                 String email = dataSnapshot.child("email").getValue(String.class);
-
+                final String yes,no;
+                yes="Yes";
+                no="No";
 
                 // setting the text so it welcome the user by first name and tells them they are logged in as the role they  have
                 final String companyNamef = companyEdit.getText().toString().trim();
@@ -178,6 +183,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 }
                 if (address.isEmpty()) {
                     addressEdit.setError(getString(R.string.input_error_address));
+                    addressEdit.requestFocus();
+                    return;
+                }
+                if (!(licence.equals(yes))||(licence.equals(no))){
+                    licenceEdit.setError(getString(R.string.errorLicence));
                     addressEdit.requestFocus();
                     return;
                 }
@@ -412,6 +422,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btn_set_date_time:
                     datePicker();
+                    break;
+            case R.id.backBtn:
+                Intent intent = new Intent(ProfileActivity.this,ServiceProviderActivity.class);
+                startActivity(intent);
+
+                break;
 
         }
     }

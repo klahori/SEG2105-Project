@@ -28,6 +28,7 @@
     <string name="updatedInfo">Successfully updated your information</string>
     <string name="addingServicesSu">Successfully added to your services</string>
     <string name="addingServiceFail">Seems like you already have that service added</string>
+    <string name="errorLicence">Sorry wrong value please check spelling Yes or No</string>
 
 
     <string name="dateError">Please select a date</string>
