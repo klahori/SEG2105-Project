@@ -4,6 +4,7 @@
 Repository link for CircleCI testing: https://github.com/klahori/seg2105-projectCircle<br />
  Group Members: Khyber Lahori, Abdullah Khalid, Osama-Al-Mazloum, Riyanson Alfred<br />
  Admin can be created although we have already created one in our firebase database and no more then one admin for the app can be created<br />
+ Emulator used: Nexus 5X API 28<br />
 **Email:** 123@gmail.com<br />
 **Password:** 123123<br />
  **How to use services**
@@ -36,20 +37,20 @@ Repository link for CircleCI testing: https://github.com/klahori/seg2105-project
 * perfrom a long click on the service you want removoved
 * a pop up will come showing the service you want to delete simply hit the delete button and the service will be removed from your profile
 * once again hit anywhere outside the popup button to remove the popup
-* once done adding/removing service to your profile you can hit the back button on the page with your services to go back to the welcome page
+* once done adding/removing service to your profile you can hit the back button on the page with your services to go back to the welcome page<br />
  **How to use edit your profile**
 * on the welcome page hit the profile button
 * there you will see your phone number, address,company name , description,and a question wheather or not you are licenced 
 * your phone number and address we got from the user when they signed up therefore those fields can be shown but not edited
 * the company name is a field that must be filled
-* the last two fields are optional but can be filled if the user wants to withe a desritpion and for the licence user cal only type in Yes or No
+* the last two fields are optional but can be filled if the user wants to withe a desritpion and for the licence user cal only type in Yes or No<br />
  **How to  add availability**
  * in profile you can also add availability once on the page where you can edit your profile account simply hit the add availability button
  * you will get a calander pop up select the day you want to work however you cannot select a date in the past 
  * next select the time you want to start working
  * next select the time you will stop working
  * the availability has been added
- * to viw it go to your welcome page by hitting the back button
+ * to viw it go to your welcome page by hitting the back button<br />
   **How to update availability**
 * on the welcome page you can see your availability 
 * to edit this long click on the availability you want to edit
@@ -57,7 +58,7 @@ Repository link for CircleCI testing: https://github.com/klahori/seg2105-project
 * once the date has been selected you will get a message telling you the date you chose if that is the day you wanted simply hit confirm on the right of the change date button to confirm the date
 * next select the start time and confirm that value  with the confirm button right of the change star time button
 * same thing for changing end time hit the change end time button and once the time has been selected hit the confirm button to the right of the change end time button
-* once all the dates and times have been confirmed you can hit the update button and the availiability will be updated
+* once all the dates and times have been confirmed you can hit the update button and the availiability will be updated<br />
   **How to delete availability**
 * to delete an availability select the availability you wanted to delete on the welcome page by long clicking it
 *a pop up will come showing the date of the availability you chose 
