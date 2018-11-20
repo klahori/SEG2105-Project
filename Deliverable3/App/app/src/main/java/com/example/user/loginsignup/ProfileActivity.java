@@ -65,7 +65,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button btn_set_date_time, submit;
     private String date_time, dateDay, endTime, startTime, dateup;
-    private int mYear, mMonth, mDay, cYear, cMonth, cDay, sHour, sMinute, eHour, eMinute;
+    private int mYear, mMonth, mDay, cYear, cMonth, cDay, sHour, sMinute, eHour, eMinute,d,mo,y;
 
     DatabaseReference databaseAvailability;
 
@@ -288,6 +288,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             toast.show();
                             return;
                         }
+                        d=day;
+                        y=year;
+                        mo=month;
                         dateDay = "Date: " + day + "-" + (month + 1) + "-" + year;
                         //*************Call Time Picker Here ********************
                         StartingTime();
@@ -311,6 +314,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
                     @Override
                     public void onTimeSet(TimePicker view, int shourOfDay, int sminute) {
+                        if(d==cDay && mo==(cMonth-1)&&y==cYear){
                         if (shourOfDay < sHour) {
                             Context context = getApplicationContext();
                             int duration = Toast.LENGTH_LONG;
@@ -326,6 +330,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             Toast toast = Toast.makeText(context, getString(R.string.sMinuteError), duration);
                             toast.show();
                             return;
+                        }
                         }
                         sHour=shourOfDay;
                         sMinute=sminute;
