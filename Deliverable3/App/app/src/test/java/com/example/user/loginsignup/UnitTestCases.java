@@ -7,17 +7,14 @@ public class UnitTestCases {
     @Test//test 1 for deliverable 3
     public void checkDate() {
         Avalibility aAvailable = new Avalibility("1","11-11-2018","5:00","6:00");
-        assertEquals("Check the name of the service", "11-11-2018", aAvailable.getDate());
+        assertEquals("Check the date of availability", "11-11-2018", aAvailable.getDate());
     }
 
     @Test//test 2 for deliverable 3
     public void checkStartTime() {
         Avalibility aAvailable = new Avalibility("1","11-11-2018","5:00","6:00");
-        assertEquals("Check the name of the service", "5:00", aAvailable.getStartTime());
+        assertEquals("Check the start time of availability", "5:00", aAvailable.getStartTime());
     }
-
-
-
 
     @Test
     public void checkServiceName() {
