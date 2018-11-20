@@ -61,8 +61,8 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
     private DatabaseReference databaseUser;
-    private EditText phoneNumEdit, addressEdit, companyEdit, licenceEdit;
-    private MultiAutoCompleteTextView descriptionEdit;
+    private EditText phoneNumEdit, addressEdit, companyEdit, licenceEdit,descriptionEdit;
+
     private Button btn_set_date_time, submit;
     private String date_time, dateDay, endTime, startTime, dateup;
     private int mYear, mMonth, mDay, cYear, cMonth, cDay, sHour, sMinute, eHour, eMinute;
@@ -77,7 +77,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         phoneNumEdit = (EditText) findViewById(R.id.phoneNum);
         btn_set_date_time = (Button) findViewById(R.id.btn_set_date_time);
         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        //getting the user special id from logged in userFirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
 
         DatabaseReference rootRef1 = FirebaseDatabase.getInstance().getReference();
         //going through database user and special id  to get to the specific user logged in
@@ -86,7 +85,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         addressEdit = (EditText) findViewById(R.id.address);
         companyEdit = (EditText) findViewById(R.id.companyName);
         licenceEdit = findViewById(R.id.licensed);
-        descriptionEdit =(MultiAutoCompleteTextView) findViewById(R.id.description);
+        descriptionEdit =(EditText) findViewById(R.id.description);
 
         findViewById(R.id.submitBtn).setOnClickListener(this);
 
@@ -186,7 +185,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                     addressEdit.requestFocus();
                     return;
                 }
-                if (!(licence.equals(yes))||(licence.equals(no))){
+                if (!((licence.equals(yes))||(licence.equals(no))||(licence.equals("")))){
                     licenceEdit.setError(getString(R.string.errorLicence));
                     addressEdit.requestFocus();
                     return;
