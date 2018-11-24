@@ -1,0 +1,68 @@
+<resources>
+    <string name="app_name">LoginSignup</string>
+    <string name="first_name">first name</string>
+    <string name="last_name">last name</string>
+    <string name="input_error_username">Username already exists</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="phone">phone</string>
+    <string name="address">address</string>
+    <string name="input_error_service">Service name is required</string>
+    <string name="input_error_price">Price per hour is required</string>
+    <string name="register">Register</string>
+    <string name="input_error_day">day of birth required</string>
+    <string name="input_error_month">month of birth required</string>
+    <string name="input_error_year">year of birth required</string>
+    <string name="input_error_day_length">day should be 2 numbers long</string>
+    <string name="input_error_month_length">month should be 2 numbers long</string>
+    <string name="input_error_year_length">year should be 4 numbers long</string>
+    <string name="nameError">Sorry a name can only contain letters and a -</string>
+    <string name="invalid_year">Please choose a current or future year</string>
+    <string name="invalid_day">Please choose a current or future day</string>
+    <string name="invalid_month">Please choose a current or future month</string>
+    <string name="companyError">Company name required</string>
+    <string name="sHourError">Please choose your starting hour time in the present or future</string>
+    <string name="sMinuteError">Please choose  a minute time in the present or future</string>
+    <string name="eHourError">Please choose your ending hour greater than or equal to your starting hour</string>
+    <string name="eMinuteError">Please choose  a ending minute greater than or equal to your starting minute</string>
+    <string name="updatedInfo">Successfully updated your information</string>
+    <string name="addingServicesSu">Successfully added to your services</string>
+    <string name="addingServiceFail">Seems like you already have that service added</string>
+    <string name="errorLicence">Sorry wrong value please check spelling Yes or No</string>
+
+
+    <string name="dateError">Please select a date</string>
+    <string name="sTimeError">Please choose a start time</string>
+    <string name="eTimeError">Please choose a end time</string>
+
+
+
+    <string name="input_error_first_name">first name required</string>
+    <string name="input_error_last_name">last name required</string>
+    <string name="input_error_role">role required</string>
+    <string name="input_error_admin">Admin already exists</string>
+    <string name="no_serviceName">Please enter the service name</string>
+    <string name="no_serviceName2">Please enter the service name if you want you keep the service name you will have to write it again</string>
+
+    <string name="noPrice">Please enter the price per hour</string>
+    <string name="input_error_role_invalid">enter a valid role make sure to check spelling</string>
+
+    <string name="input_error_email">email required</string>
+    <string name="input_error_password">password required</string>
+    <string name="input_error_phone">phone required</string>
+    <string name="input_error_password_length">password should be atleast 6 characters long</string>
+    <string name="input_error_phone_invalid">enter a valid phone number</string>
+    <string name="input_error_address">address required</string>
+    <string name="signin_success">Signed in Successfully</string>
+    <string name="sigin_fail">Signing in failed</string>
+    <string name="registration_Success">You have been Registered Successfully</string>
+    <string name="service_added">Service has been added Successfully</string>
+    <string name="service_fail">Service had not been added due to an error</string>
+
+    <string name="admin">Admin</string>
+    <string name="sp">Service Provider</string>
+    <string name="hm">Home Owner</string>
+
+    <string name="registration_success">Registered Successfully</string>
+    <string name="input_error_email_invalid">enter a valid email</string>
+</resources>
