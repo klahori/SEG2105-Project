@@ -108,6 +108,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                                     }
 
+                                    else if(role.equals("Home Owner")) {
+                                        startActivity(new Intent(getApplicationContext(), HomeOwnerActivity.class));
+
+                                    }
+
                                     else{
                                         startActivity(new Intent(getApplicationContext(), WelcomeActivity.class));
 
