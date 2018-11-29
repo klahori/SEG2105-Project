@@ -81,7 +81,7 @@ public class ServiceActivity extends AppCompatActivity   {
                                     return true;
                                 }
                             });
-                        }
+    }
 
 
                         @Override

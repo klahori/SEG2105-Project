@@ -36,7 +36,6 @@
     <string name="eTimeError">Please choose a end time</string>
 
 
-
     <string name="input_error_first_name">first name required</string>
     <string name="input_error_last_name">last name required</string>
     <string name="input_error_role">role required</string>
