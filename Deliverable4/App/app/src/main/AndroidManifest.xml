@@ -25,7 +25,8 @@
         <activity android:name=".ProfileActivity" />
         <activity android:name=".ServicePActivity" />
         <activity android:name=".AdminServicesActivity" />
-        <activity android:name=".HomeOwnerActivity"></activity>
+        <activity android:name=".HomeOwnerActivity" />
+        <activity android:name=".BookingService" />
     </application>
 
 </manifest>

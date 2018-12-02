@@ -4,7 +4,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.example.user.loginsignup"
-        minSdkVersion 23
+        minSdkVersion 26
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -34,7 +34,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     //implementation 'com.firebaseui:firebase-ui-database:4.2.1'
     //implementation 'com.firebaseui:firebase-ui-database:3.1.1'
-
 }
 
 
