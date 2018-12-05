@@ -28,11 +28,11 @@ public class ServiceSearchList extends ArrayAdapter<ServiceSearch> {
 
         TextView serviceName = (TextView) listView.findViewById(R.id.serviceName);
         TextView cost = (TextView) listView.findViewById(R.id.servicePrice);
-        TextView rating = (TextView) listView.findViewById(R.id.serviceRating);
+        //TextView rating = (TextView) listView.findViewById(R.id.serviceRating);
 
         serviceName.setText(services.get(position).getServiceName());
         cost.setText(services.get(position).getCost());
-        rating.setText(services.get(position).getRating());
+        //rating.setText(services.get(position).getRating());
         return listView;
     }
 }

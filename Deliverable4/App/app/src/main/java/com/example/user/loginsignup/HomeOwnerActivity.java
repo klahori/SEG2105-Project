@@ -139,7 +139,7 @@ public class HomeOwnerActivity extends AppCompatActivity implements View.OnClick
                     String logData = ("Service Name: " + serviceName + " Cost: " + cost + " ");
                     Log.d("TAG", logData);
                     //create of type serviceSearch
-                    ServiceSearch service = new ServiceSearch(serviceName, cost, "Unrated");
+                    ServiceSearch service = new ServiceSearch(serviceName, cost);
                     // adds all services in an arraylist
                     services.add(service);
                 }

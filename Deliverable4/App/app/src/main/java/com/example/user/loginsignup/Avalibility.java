@@ -2,7 +2,7 @@ package com.example.user.loginsignup;
 
 public class Avalibility {
 
-    public String date,endTime,startTime;
+    public String date,endTime,startTime, serviceName;
     private String _id;
 
     public Avalibility() {
@@ -13,9 +13,15 @@ public class Avalibility {
         this.date = date;
         this.startTime=startTime;
         this.endTime =endTime;
-
-
     }
+    public Avalibility(String id,String date,String startTime,String endTime, String serviceName){
+        this._id=id;
+        this.date = date;
+        this.startTime=startTime;
+        this.endTime =endTime;
+        this.serviceName = serviceName;
+    }
+
     public void setId(String id) {
         _id = id;
     }

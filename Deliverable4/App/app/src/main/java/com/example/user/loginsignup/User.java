@@ -93,6 +93,10 @@ public class User {
     public String getRating() {
         return rating;
     }
+
+    public String getnumberOfRatings() {
+        return numberOfRatings;
+    }
 //setters
     public void setAddress(String address) {
         this.address = address;
@@ -160,6 +164,10 @@ public class User {
 
     public void setRating(String rating) {
         this.rating = rating;
+    }
+
+    public void setnumberOfRatings(String numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
     }
 
 }

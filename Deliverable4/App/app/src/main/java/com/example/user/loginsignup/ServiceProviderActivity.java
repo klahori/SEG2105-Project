@@ -192,7 +192,7 @@ public class ServiceProviderActivity extends AppCompatActivity implements View.O
                                 toast.show();
                                 return;
                             }
-                            if(day<cDay&&month==cMonth&&year==cYear){
+                            if(month<cMonth&&year==cYear){
                                 Context context = getApplicationContext();
                                 //CharSequence text = "Hello toast!";
                                 int duration = Toast.LENGTH_SHORT;

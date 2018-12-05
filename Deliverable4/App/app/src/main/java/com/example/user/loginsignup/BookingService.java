@@ -23,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -47,6 +48,7 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
     private Button back_btn;
     private int cYear,cMonth,cDay, mYear, mMonth, mDay,sHour,sMinute,eHour,eMinute, startAvalHour, startAvalMin, endAvalHour ,endAvalMin;
     private String dateup,chosenStartTime, chosenEndTime;
+    private String currentUserid, avalibilityId;
     private int selectedRating;
 
     @Override
@@ -67,6 +69,9 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
         Intent intent = getIntent();
         final String serviceName = intent.getStringExtra("serviceName");
         //text.setText(serviceName);
+        //Getting the current User Id from FireBase
+        currentUserid= FirebaseAuth.getInstance().getCurrentUser().getUid();
+        Log.d("TAG","+++++++++++++++++++++++++ UserID = " + currentUserid);
 
         DatabaseReference rootRef3 = FirebaseDatabase.getInstance().getReference();
         Query serviceRef = rootRef3.child("Users").orderByChild("role").equalTo("Service Provider");
@@ -129,7 +134,8 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
                                                     String date = ds.child("date").getValue().toString();
                                                     String startTime = ds.child("startTime").getValue().toString();
                                                     String endTime = ds.child("endTime").getValue().toString();
-                                                    Log.d("TAG", "---------------"+ finalI + "---------------------------------------");
+                                                    avalibilityId = ds.child("id").getValue().toString();
+                                                    Log.d("TAG", "--------------- finalI"+ finalI + "---------------------------------------");
                                                     services.get(0).setDate(date);
                                                     services.get(0).setStartTime(startTime);
                                                     services.get(0).setEndTime(endTime);
@@ -219,8 +225,9 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
                 String date = services.get(i).getDate();
                 String start = services.get(i).getStartTime();
                 String end = services.get(i).getEndTime();
+                String serviceid = services.get(i).getId();
                 Log.d("TAG", "========================= Name: " + name + "Date: " + date + "/n Start Time" + start + " End Time: " + end);
-                bookServiceDialog(name, date, start, end);
+                bookServiceDialog(name, date, start, end, serviceid);
             }
         });
 
@@ -238,7 +245,7 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
 
     }
 
-    private void bookServiceDialog (final String serviceName, final String date, final String startTime, final String endTime) {
+    private void bookServiceDialog (final String serviceName, final String date, final String startTime, final String endTime, final String serviceId) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
         LayoutInflater inflater = getLayoutInflater();
@@ -290,7 +297,7 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
                 }
 
                 if (!TextUtils.isEmpty(date)) {
-                    updateBookTime(serviceName, date, sTime,eTime);
+                    updateBookTime(serviceName, date, sTime,eTime, serviceId, endTime);
                     b.dismiss();
                 }
             }
@@ -355,12 +362,21 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
 
 
 
-    private void updateBookTime(String serviceName, String date, String startTime, String endTime) {
+    private void updateBookTime(String serviceName, String date, String startTime, String endTime, String serviceId, String endAvalTime) {
+    //private void updateBookTime() {
 
-        Log.d("TAG", "========================= serviceName: " + serviceName);
-        Log.d("TAG", "========================= Date: " + date);
-        Log.d("TAG", "========================= startTime: " + startTime);
-        Log.d("TAG", "========================= endTime: " + endTime);
+        DatabaseReference user = FirebaseDatabase.getInstance().getReference().child("Users").child(currentUserid);
+        Avalibility booking = new Avalibility(currentUserid, date, startTime, endTime, serviceName);
+        user.child("Booking").setValue(booking);
+
+        DatabaseReference serviceAvailability = FirebaseDatabase.getInstance().getReference().child("Users").child(serviceId);
+        //Calculate New StartTime and EndTime (End/time should be the same)
+        String newStartTime = endTime;
+        Avalibility updateServiceAvailability = new Avalibility(currentUserid, date, newStartTime, endAvalTime);
+        Log.d("TAG", "====================== avalibilityId = " + avalibilityId);
+        //serviceAvailability.child("Availability").child(avalibilityId).setValue(updateServiceAvailability);
+
+        Toast.makeText(getApplicationContext(), "Booking Set", Toast.LENGTH_LONG).show();
 
 
 

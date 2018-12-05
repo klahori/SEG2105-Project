@@ -9,10 +9,9 @@ public class ServiceSearch {
 
     }
 
-    public ServiceSearch(String serviceName, String cost, String rating) {
+    public ServiceSearch(String serviceName, String cost) {
         this.serviceName = serviceName;
         this.cost = cost;
-        this.rating = rating;
     }
 
     public String getServiceName() {
