@@ -8,11 +8,11 @@ public class ServiceInformation {
         this.serviceName = serviceName;
         this.cost = cost;
         this.id = id;
-        this.rating = "unrated";
         this.date = "Date: Unavailable";
         this.StartTime = "Start Time: Unavailable";
         this.endTime = "End Time: Unavailable";
         this.email = "Email: Unavailable";
+        this.rating = "unrated";
     }
 
     public String getServiceName() {

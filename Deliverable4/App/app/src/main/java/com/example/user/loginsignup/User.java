@@ -1,7 +1,7 @@
 package com.example.user.loginsignup;
 
 public class User {
-    public String firstName, email, phone,lastName,address,role,username,day,month,year,companyName,description,licence,date,startTime,endTime;
+    public String firstName, email, phone,lastName,address,role,username,day,month,year,companyName,description,licence,date,startTime,endTime, rating,  numberOfRatings;
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
@@ -17,6 +17,11 @@ public class User {
         this.day =day;
         this.month=month;
         this.year=year;
+
+        if (role.equals("Service Provider")) {
+            this.rating = "unrated";
+            this.numberOfRatings = "0";
+        }
 
     }
 //getters
@@ -84,6 +89,10 @@ public class User {
     public String getFirstName() {
         return firstName;
     }
+
+    public String getRating() {
+        return rating;
+    }
 //setters
     public void setAddress(String address) {
         this.address = address;
@@ -148,4 +157,9 @@ public class User {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setRating(String rating) {
+        this.rating = rating;
+    }
+
 }

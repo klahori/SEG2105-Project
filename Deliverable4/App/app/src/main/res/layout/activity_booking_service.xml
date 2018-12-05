@@ -21,7 +21,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose a Service Provider" />
+            android:text="Press a Service Provider to Book service." />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,14 +35,8 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textPersonName"
-                android:text="Service Name" />
+                android:text="Long press to rate service" />
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Book Service" />
         </LinearLayout>
 
         <ListView
