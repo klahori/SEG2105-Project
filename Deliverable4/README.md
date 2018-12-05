@@ -1,6 +1,7 @@
-# seg2105-projectCircle
-This is the repository for the circleCI testing for our main app</br>
+# SEG2105-Project
+This is the main reposirtory for deliverable 4</br>
 On-Demand Home Repair Services App </br>
-Main Repository link:https://github.com/klahori/SEG2105-Project</br>
+CircleCI Repository link: https://github.com/klahori/seg2105-projectCircle</br>
 Group Members: Khyber Lahori, Abdullah Khalid, Osama-Al-Mazloum, Riyanson Alfred </br>
-Image of circleCI running successfully can be found in the submit folder for deliverable 2 in the main repository
+HomeOwner email:1@gmail.com
+Password: 123123
