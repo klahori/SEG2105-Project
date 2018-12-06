@@ -37,13 +37,30 @@ public class UnitTestCases {
     public void checkEmail() {
         ServiceInformation service = new ServiceInformation("Cleaning","50","1a2b3c");
         service.setEmail("ServiceProvider@gmail.com");
-        assertEquals("Check the Rating of the Service Provider After updating the Rating", "ServiceProvider@gmail.com", service.getEmail());
+        assertEquals("Check the Email of the Service Provider", "ServiceProvider@gmail.com", service.getEmail());
     }
 
-    @Test
-    public void checkUserEmail() {
-        User aUser = new User("something","Jonny","Boy","Jonny@gmail.com","1231231234","somwhere land","Home Owner","12","12","1996");
-        assertEquals("Check the email address of the user", "Jonny@gmail.com", aUser.getEmail());
+    @Test//test 7 for deliverable 4
+    public void checkStartTime() {
+        ServiceInformation service = new ServiceInformation("Cleaning","50","1a2b3c");
+        service.setStartTime("Start Time: 3:14");
+        assertEquals("Check the Start Time", "Start Time: 3:14", service.getStartTime());
+    }
+    @Test//test 8 for deliverable 4
+    public void checkEndTime() {
+        ServiceInformation service = new ServiceInformation("Cleaning","50","1a2b3c");
+        service.setEndTime("End Time: 4:14");
+        assertEquals("Check the End Time", "End Time: 4:14", service.getEndTime());
+    }
+    @Test//test 9 for deliverable 4
+    public void checkBookingId() {
+        Avalibility booking = new Avalibility("1a2b3c","Date","Start Time: 3:14","End Time: 4:14");
+        assertEquals("Check the Booking Id", "1a2b3c",booking.getId());
+    }
+    @Test//test 10 for deliverable 4
+    public void checkBookingDate() {
+        Avalibility booking = new Avalibility("1a2b3c","Date","Start Time: 3:14","End Time: 4:14");
+        assertEquals("Check the date of the Booking", "Date",booking.getDate());
     }
 
 }

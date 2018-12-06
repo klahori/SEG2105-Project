@@ -398,7 +398,7 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
         rateDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                Toast.makeText(getApplicationContext(), "Not Rating Service", Toast.LENGTH_LONG).show();
+                Toast.makeText(getApplicationContext(), "The Service is not Rated", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -457,7 +457,8 @@ public class BookingService extends AppCompatActivity implements View.OnClickLis
                         //Average the rating
                         int cRating = Integer.parseInt(currentRating);
                         cRating = (cRating*(ratingNumber-1) + rating)/ratingNumber;
-                        ref.child("rating").setValue(cRating);
+                        String cRatingString = String.valueOf(cRating);
+                        ref.child("rating").setValue(cRatingString);
                     }
                     //Set the Last Comment
                     ref.child("LastComment").setValue(comment);
